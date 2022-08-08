@@ -39,6 +39,6 @@ systemctl daemon-reload &>>/temp/cart.log
 echo $?
 
 echo Starting card service
-systemctl start cart
-systemctl enable cart
+systemctl start cart &>>/temp/cart.log
+systemctl enable cart &>>/temp/cart.log
 echo $?
