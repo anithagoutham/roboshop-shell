@@ -1,7 +1,7 @@
 
 echo setting NodeJS repos
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/temp/cart.log
-if [$? -eq 0]; then
+if [ $? -eq 0]; then
   echo -e "\e[32mSUCCESS\e[0m"
 else
   echo -e "\e[31mFAILURE\e[0m"
@@ -26,10 +26,12 @@ echo $?
 
 
 echo Extract Application Archieve
-unzip /tmp/cart.zip &>>/temp/cart.log
-mv cart-main cart &>>/temp/cart.log
-cd cart &>>/temp/cart.log
-echo $?
+unzip /tmp/cart.zip &>>/temp/cart.log && mv cart-main cart &>>/temp/cart.log && cd cart &>>/temp/cart.log
+if [ $? -eq 0]; then
+  echo -e "\e[32mSUCCESS\e[0m"
+else
+  echo -e "\e[31mFAILURE\e[0m"
+fi
 
 
 echo Installing NodeJS Independencies
