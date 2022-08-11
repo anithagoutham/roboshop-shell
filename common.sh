@@ -42,12 +42,12 @@ nodejs() {
     npm install &>>/tmp/${component}.log
     statuscheck
 
-    echo Configuration Cart Systemd Service
+    echo Configuration component Systemd Service
     mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>/tmp/${component}.log && systemctl daemon-reload &>>/tmp/${component}.log
     statuscheck
 
-    echo Starting card service
-    systemctl start ${component} &>>/tmp/${component}.log && systemctl enable cart &>>/tmp/${component}.log
+    echo Starting component service
+    systemctl start ${component} &>>/tmp/${component}.log && systemctl enable ${component} &>>/tmp/${component}.log
     statuscheck
 
 
