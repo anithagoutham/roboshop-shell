@@ -11,18 +11,37 @@ else
 
 nodejs() {
   echo setting NodeJS repos
-    curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/cart.log
+    curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/${component}.log
     statuscheck
 
     echo installing NodeJS
-    yum install nodejs -y&>>/tmp/cart.log
+    yum install nodejs -y&>>/tmp/${component}.log
     statuscheck
 
-    id roboshop &>>/tmp/cart.log
+    id roboshop &>>/tmp/${component}.log
     if [ $? -ne 0 ]; then
        echo Adding Application User
-       useradd roboshop&>>/tmp/cart.log
+       useradd roboshop&>>/tmp/${component}.log
        statuscheck
     fi
+
+    echo Downloading Application Content
+    curl -s -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>/tmp/${component}.log
+    cd /home/roboshop &>>/tmp/${component}.log
+    statuscheck
+
+    echo Cleaning old application content
+    rm -rf cart &>>/tmp/${component}.log
+    statuscheck
+
+    echo Extract Application Archieve
+    unzip /tmp/${component}.zip &>>/tmp/${component}.log && mv cart-main cart &>>/tmp/${component}.log && cd cart &>>/tmp/${component}.log
+    statuscheck
+
+    echo Installing NodeJS Independencies
+    npm install &>>/tmp/${component}.log
+    statuscheck
+
+
 }
 
