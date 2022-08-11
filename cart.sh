@@ -7,43 +7,41 @@ else
  fi
 }
 echo setting NodeJS repos
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/temp/cart.log
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/cart.log
   statuscheck
 
   echo installing NodeJS
-  yum install nodejs -y &>>/temp/cart.log
+  yum install nodejs -y&>>/tmp/cart.log
   statuscheck
 
-  id roboshop &>>/temp/cart.log
-  if[ $? -ne 0 ]; then
+  id roboshop &>>/tmp/cart.log
+  if [ $? -ne 0 ]; then
      echo Adding Application User
-     useradd roboshop &>>/temp/cart.log
+     useradd roboshop&>>/tmp/cart.log
      statuscheck
   fi
 
-
-
 echo Downloading Application Content
-curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>/temp/cart.log
-cd /home/roboshop &>>/temp/cart.log
+curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>/tmp/cart.log
+cd /home/roboshop &>>/tmp/cart.log
 statuscheck
 
 echo Cleaning old application content
-rm -rf cart &>>/temp/cart.log
+rm -rf cart &>>/tmp/cart.log
 statuscheck
 
 echo Extract Application Archieve
-unzip /tmp/cart.zip &>>/temp/cart.log && mv cart-main cart &>>/temp/cart.log && cd cart &>>/temp/cart.log
+unzip /tmp/cart.zip &>>/tmp/cart.log && mv cart-main cart &>>/tmp/cart.log && cd cart &>>/tmp/cart.log
 statuscheck
 
 echo Installing NodeJS Independencies
-npm install &>>/temp/cart.log
+npm install &>>/tmp/cart.log
 statuscheck
 
 echo Configuration Cart Systemd Service
-mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>/temp/cart.log && systemctl daemon-reload &>>/temp/cart.log
+mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>/tmp/cart.log && systemctl daemon-reload &>>/tmp/cart.log
 statuscheck
 
 echo Starting card service
-systemctl start cart &>>/temp/cart.log && systemctl enable cart &>>/temp/cart.log
+systemctl start cart &>>/tmp/cart.log && systemctl enable cart &>>/tmp/cart.log
 statuscheck
