@@ -9,20 +9,3 @@ else
  fi
 }
 
-nodejs() {
-
-  echo setting NodeJS repos
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/temp/cart.log
-  statuscheck
-
-  echo installing NodeJS
-  yum install nodejs -y &>>/temp/cart.log
-  statuscheck
-
-  id roboshop &>>/temp/cart.log
-  if[ $? -ne 0 ]; then
-     echo Adding Application User
-     useradd roboshop &>>/temp/cart.log
-     statuscheck
-  fi
-}
