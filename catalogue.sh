@@ -1,6 +1,4 @@
 source common.sh
-
-
-
-component=catalogue
 nodejs
+component=catalogue
+
