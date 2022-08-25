@@ -1,6 +1,7 @@
 source common.sh
-nodejs
+
 component=cart
+nodejs
 
 
 
