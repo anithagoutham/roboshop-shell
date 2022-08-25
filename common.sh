@@ -35,7 +35,7 @@ nodejs() {
     statuscheck
 
     echo Extract Application Archieve
-    unzip  /tmp/${component}.zip &>>/tmp/${component}.log && mv ${component}-main ${component} &>>/tmp/${component}.log && cd /home/roboshop/${component} &>>/tmp/${component}.log
+    unzip  -o /tmp/${component}.zip &>>/tmp/${component}.log && mv ${component}-main ${component} &>>/tmp/${component}.log && cd /home/roboshop/${component} &>>/tmp/${component}.log
     statuscheck
 
     echo Installing NodeJS dependencies
