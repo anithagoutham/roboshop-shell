@@ -21,7 +21,7 @@ nodejs() {
     id roboshop &>>/tmp/${component}.log
     if [ $? -ne 0 ]; then
        echo Adding Application User
-       useradd roboshop&>>/tmp/${component}.log
+       useradd roboshop &>>/tmp/${component}.log
        statuscheck
     fi
 
@@ -31,18 +31,18 @@ nodejs() {
     statuscheck
 
     echo Cleaning old application content
-    rm -rf cart &>>/tmp/${component}.log
+    rm -rf ${component} &>>/tmp/${component}.log
     statuscheck
 
     echo Extract Application Archieve
-    unzip /tmp/${component}.zip &>>/tmp/${component}.log && mv cart-main cart &>>/tmp/${component}.log && cd cart &>>/tmp/${component}.log
+    unzip -0 /tmp/${component}.zip &>>/tmp/${component}.log && mv ${component}-main ${component} &>>/tmp/${component}.log && cd ${component} &>>/tmp/${component}.log
     statuscheck
 
-    echo Installing NodeJS Independencies
+    echo Installing NodeJS dependencies
     npm install &>>/tmp/${component}.log
     statuscheck
 
-    echo Configuration component Systemd Service
+    echo Configuration ${component} Systemd Service
     mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>/tmp/${component}.log && systemctl daemon-reload &>>/tmp/${component}.log
     statuscheck
 
