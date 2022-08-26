@@ -11,7 +11,7 @@ yum install -y mongodb-org &>>${Log}
 statuscheck
 
 echo start mongodb service
-systemctl enable mongod &>>${Log} systemctl start mongod &>>${Log}
+systemctl enable mongod &>>${Log} && systemctl start mongod &>>${Log}
 statuscheck
 
 ## update the listen configuration
