@@ -1,6 +1,6 @@
 source common.sh
 
-common = redis
+component=redis
 
 
 echo setup yum repo
@@ -8,10 +8,11 @@ curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/red
 statuscheck
 
 echo install redis
-yum install redis-6.2.7 -y &>>${log}
+yum install redis-6.2.7 -y &>>${Log}
 statuscheck
 
 # update listen ip
 
-systemctl enable redis &>>${log} && systemctl start redis &>>${log}
+echo start redis service
+systemctl enable redis &>>${Log} && systemctl start redis &>>${Log}
 statuscheck
