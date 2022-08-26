@@ -4,7 +4,7 @@ component=redis
 
 
 echo setup yum repo
-curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${log}
+curl -L https://raw.githubusercontent.com/roboshop-devops-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>>${Log}
 statuscheck
 
 echo install redis
