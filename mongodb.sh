@@ -1,6 +1,6 @@
 source common.sh
 
-component = mongodb
+component=mongodb
 
 echo setup yum repo
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
@@ -19,7 +19,7 @@ statuscheck
 download
 
 echo extract the schema files
-cd /tmp &>>${Log} && unzip -o mongodb.zip &>>${Log}
+cd /tmp  && unzip -o mongodb.zip &>>${Log}
 statuscheck
 
 echo load schema

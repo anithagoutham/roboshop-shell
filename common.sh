@@ -37,7 +37,7 @@ nodejs() {
     cd /home/roboshop &>>/tmp/${component}.log && rm -rf ${component} &>>/tmp/${component}.log
     statuscheck
 
-    echo Extract Application Archieve
+  echo Extract Application Archieve
     unzip -o /tmp/${component}.zip &>>${Log} && mv ${component}-main ${component} &>>${Log} && cd ${component} &>>${Log}
     statuscheck
 
