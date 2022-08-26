@@ -38,11 +38,11 @@ nodejs() {
     statuscheck
 
     echo Extract Application Archieve
-    unzip -o /tmp/${component}.zip &>>{Log} && mv ${component}-main ${component} &>>{Log} && cd /home/roboshop/${component} &>>{Log}
+    unzip -o /tmp/${component}.zip &>>${Log} && mv ${component}-main ${component} &>>${Log} && cd /home/roboshop/${component} &>>${Log}
     statuscheck
 
     echo Installing NodeJS dependencies
-    npm install &>>/tmp/${component}.log
+    npm install &>>log
     statuscheck
 
     echo Configuration ${component} Systemd Service
