@@ -42,15 +42,15 @@ nodejs() {
     statuscheck
 
     echo Installing NodeJS dependencies
-    npm install &>>log
+    npm install &>>${Log}
     statuscheck
 
     echo Configuration ${component} Systemd Service
-    mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>/tmp/${component}.log && systemctl daemon-reload &>>/tmp/${component}.log
+    mv /home/roboshop/${component}/systemd.service /etc/systemd/system/${component}.service &>>${Log} && systemctl daemon-reload &>>${Log}
     statuscheck
 
     echo Starting component service
-    systemctl start ${component} &>>/tmp/${component}.log && systemctl enable ${component} &>>/tmp/${component}.log
+    systemctl start ${component} &>>${Log} && systemctl enable ${component} &>>${Log}
     statuscheck
 }
 user_id=$(id -u)
