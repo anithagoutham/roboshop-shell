@@ -9,6 +9,12 @@ else
  fi
 }
 
+download(){
+ echo Downloading Application Content
+     curl -s -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>/tmp/${component}.log
+    statuscheck
+}
+
 nodejs() {
   echo setting NodeJS repos
     curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/${component}.log
@@ -25,17 +31,14 @@ nodejs() {
        statuscheck
     fi
 
-    echo Downloading Application Content
-    curl -s -L -o /tmp/${component}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>/tmp/${component}.log
-    cd /home/roboshop &>>/tmp/${component}.log
-    statuscheck
+    download
 
     echo Cleaning old application content
-    rm -rf ${component} &>>/tmp/${component}.log
+    cd /home/roboshop &>>/tmp/${component}.log && rm -rf ${component} &>>/tmp/${component}.log
     statuscheck
 
     echo Extract Application Archieve
-    unzip -o /tmp/${component}.zip &>>/tmp/${component}.log && mv ${component}-main ${component} &>>/tmp/${component}.log && cd ${component} &>>/tmp/${component}.log
+    unzip -o /tmp/${component}.zip &>>/tmp/${component}.log && mv ${component}-main ${component} &>>/tmp/${component}.log && cd /home/roboshop/${component} &>>/tmp/${component}.log
     statuscheck
 
     echo Installing NodeJS dependencies
@@ -49,7 +52,12 @@ nodejs() {
     echo Starting component service
     systemctl start ${component} &>>/tmp/${component}.log && systemctl enable ${component} &>>/tmp/${component}.log
     statuscheck
-
-
 }
+user_id=$(id -u)
+if [ $user_id -ne 0 ]; then
+  echo -e "\e[31m u should ru the script as root user or sudo\e[0m"
+  exit 1
+fi
+
+Log=/tmp/${component}.log
 

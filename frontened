@@ -4,21 +4,21 @@
 
 source common.sh
 
-component = frontened
+component=frontened
 
 echo installing nginx
-yum install nginx -y &>>${log}
+yum install nginx -y &>>${Log}
 statuscheck
 
 download
 
-echo clean odd content
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+echo clean old content
+#curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 cd /usr/share/nginx/html && rs -rf *
 statuscheck
 
 echo extract download content
-unzip -0 /tmp/frontend.zip &>>{log} && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+unzip -0 /tmp/frontend.zip &>>${log} && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
 statuscheck
 
 echo start nginx service
