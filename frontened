@@ -18,11 +18,11 @@ cd /usr/share/nginx/html && rs -rf *
 statuscheck
 
 echo extract download content
-unzip -0 /tmp/frontend.zip &>>${log} && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+unzip -0 /tmp/frontend.zip &>>${Log} && mv frontend-main/static/* . && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
 statuscheck
 
 echo start nginx service
-systemctl restrart nginx &>>${log} && systemctl enable nginx &>>${log}
+systemctl restrart nginx &>>${Log} && systemctl enable nginx &>>${Log}
 
 
 
