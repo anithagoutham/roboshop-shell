@@ -60,4 +60,4 @@ if [ $user_id -ne 0 ]; then
 fi
 
 Log=/tmp/${component}.log
-
+rm -f ${Log}
