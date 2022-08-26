@@ -23,7 +23,9 @@ cd /tmp  && unzip -o mongodb.zip &>>${Log}
 statuscheck
 
 echo load schema
-cd mongodb-main && mongo < catalogue.js &>>${Log} && mongo < users.js &>>${Log}
+cd mongodb-main
+mongo < catalogue.js
+mongo < users.js &>>${Log}
 statuscheck
 
 
