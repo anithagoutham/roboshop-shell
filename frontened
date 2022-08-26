@@ -18,9 +18,7 @@ rm -rf *
 statuscheck
 
 echo extract download content
-unzip -0 /tmp/frontend.zip &>>${Log} &&
- mv frontend-main/static/* .  &&
- mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+unzip -o /tmp/frontend.zip &>>${Log} &&  mv frontend-main/static/* .  && mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
 statuscheck
 
 echo start nginx service
