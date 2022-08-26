@@ -12,9 +12,8 @@ statuscheck
 
 download
 
-echo clean old content &&
-cd /usr/share/nginx/html
-rm -rf *
+echo clean old content
+cd /usr/share/nginx/html && rm -rf *
 statuscheck
 
 echo extract download content
