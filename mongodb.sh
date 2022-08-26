@@ -7,11 +7,11 @@ curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/robos
 statuscheck
 
 echo install mongodb
-yum install -y mongodb-org &>>${log}
+yum install -y mongodb-org &>>${Log}
 statuscheck
 
 echo start mongodb service
-systemctl enable mongod &>>${log} systemctl start mongod &>>${log}
+systemctl enable mongod &>>${Log} systemctl start mongod &>>${Log}
 statuscheck
 
 ## update the listen configuration
@@ -19,11 +19,11 @@ statuscheck
 download
 
 echo " extract the schema files"
-cd /tmp && unzip -0 mongodb.zip &>>${log}
+cd /tmp && unzip -o mongodb.zip &>>${Log}
 statuscheck
 
 echo load schema
-cd mongodb-main && mongo < catalogue.js &>>${log} && mongo < users.js &>>${log}
+cd mongodb-main && mongo < catalogue.js &>>${Log} && mongo < users.js &>>${Log}
 statuscheck
 
 
