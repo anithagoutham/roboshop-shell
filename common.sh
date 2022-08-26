@@ -17,28 +17,28 @@ download(){
 
 nodejs() {
   echo setting NodeJS repos
-    curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/${component}.log
+    curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${Log}
     statuscheck
 
     echo installing NodeJS
-    yum install nodejs -y&>>/tmp/${component}.log
+    yum install nodejs -y &>>${Log}
     statuscheck
 
-    id roboshop &>>/tmp/${component}.log
+    id roboshop &>>${log}
     if [ $? -ne 0 ]; then
        echo Adding Application User
-       useradd roboshop &>>/tmp/${component}.log
+       useradd roboshop &>>${Log}
        statuscheck
     fi
 
     download
 
     echo Cleaning old application content
-    cd /home/roboshop &>>/tmp/${component}.log && rm -rf ${component} &>>/tmp/${component}.log
+    cd /home/roboshop &>>${Log} && rm -rf ${component} &>>${Log}
     statuscheck
 
   echo Extract Application Archieve
-    unzip -o /tmp/${component}.zip &>>${Log} && mv ${component}-main ${component} &>>${Log} && cd ${component} &>>${Log}
+    unzip -o /tmp/${component}.zip &>>${Log} && mv ${component}-main ${component} &>>${Log} && cd /home/roboshop/${component} &>>${Log}
     statuscheck
 
     echo Installing NodeJS dependencies
