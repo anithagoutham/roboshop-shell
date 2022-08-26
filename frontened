@@ -13,7 +13,7 @@ statuscheck
 download
 
 echo clean old content
-#curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 cd /usr/share/nginx/html && rs -rf *
 statuscheck
 
