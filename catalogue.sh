@@ -1,4 +1,4 @@
+COMPONENT=catalogue
 source common.sh
-NODEJS
-component=catalogue
 
+NODEJS

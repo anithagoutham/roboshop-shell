@@ -9,7 +9,7 @@ StatusCheck() {
   fi
 }
 
-download() {
+DOWNLOAD() {
   echo Downloading ${COMPONENT} Application Content
   curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG}
   StatusCheck
@@ -30,7 +30,7 @@ APP_CLEAN() {
   StatusCheck
 
   echo Extract Application Archive
-  unzip -o /tmp/${COMPONENT}.zip &>>${LOG} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG} && cd /home/roboshop/${COMPONENT} &>>${LOG}
+  unzip -o /tmp/${COMPONENT}.zip &>>${LOG} && mv ${COMPONENT}-main ${COMPONENT} &>>${LOG} && cd ${COMPONENT} &>>${LOG}
   StatusCheck
 }
 

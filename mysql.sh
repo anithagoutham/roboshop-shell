@@ -38,17 +38,3 @@ DOWNLOAD
 echo "Extract & Load Schema"
 cd /tmp &>>${LOG} && unzip -o mysql.zip &>>${LOG} &&  cd mysql-main &>>${LOG} && mysql -u root -p$MYSQL_PASSWORD <shipping.sql &>>${LOG}
 StatusCheck
-
-
-echo "show plugins;" | mysql -uroot -p$mysql_password | grep validate_password &>>{Log}
-if [ $? -eq 0 ]; then
-  echo remove password validate plugin
-  echo "uninstall plugin validate_password;" | mysql -uroot -p$mysql_password
-  statuscheck
-fi
-
-download
-
-echo "extract & load schema"
-cd /tmp &>>${Log} &&  unzip -o mysql.zip &>>${Log} && cd mysql-main &>>${Log} && mysql -u root -pRoboShop@1 <shipping.sql &>>${Log}
-statuscheck

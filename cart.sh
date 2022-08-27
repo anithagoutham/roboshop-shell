@@ -1,5 +1,6 @@
-component=cart
+COMPONENT=cart
 source common.sh
+
 NODEJS
 
 
