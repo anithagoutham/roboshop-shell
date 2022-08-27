@@ -1,30 +1,34 @@
+COMPONENT=mongodb
 source common.sh
 
-component=mongodb
+echo Setup YUM repo
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>${LOG}
+StatusCheck
 
-echo setup yum repo
-curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
-statuscheck
+echo Install MongoDB
+yum install -y mongodb-org  &>>${LOG}
+StatusCheck
 
-echo install mongodb
-yum install -y mongodb-org &>>${Log}
-statuscheck
+echo Update MongoDB Listen Address
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>${LOG}
+StatusCheck
 
-echo start mongodb service
-systemctl enable mongod &>>${Log} && systemctl start mongod &>>${Log}
-statuscheck
+echo Start MongoDB Service
+systemctl enable mongod &>>${LOG} && systemctl restart mongod &>>${LOG}
+StatusCheck
 
-## update the listen configuration
+DOWNLOAD
 
-download
+echo "Extract Schema Files"
+cd /tmp && unzip -o mongodb.zip &>>${LOG}
+StatusCheck
 
-echo extract the schema files
-cd /tmp  && unzip -o mongodb.zip &>>${Log}
-statuscheck
-
-echo load schema
-cd mongodb-main && mongo < catalogue.js && mongo < users.js &>>${Log}
-statuscheck
+echo Load Schema
+cd mongodb-main
+for schema in catalogue.js users.js ; do
+  mongo <  $schema
+done
+StatusCheck
 
 
 
